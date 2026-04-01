@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Scenario Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="builder-shell">
+    <header class="builder-header">
+      <div class="header-actions">
+        <input type="text" id="scenario-name" placeholder="Scenario name..." class="scenario-name-input" />
+        <button id="export-html-btn" class="action-btn primary">Export HTML</button>
+      </div>
+    </header>
+
+    <main class="builder-main">
+      <section class="chat-canvas" aria-label="Conversation builder">
+        <div id="blocks-container" class="blocks-container"></div>
+
+        <div class="composer-controls">
+          <button id="add-user-msg-btn" class="add-btn">+ User</button>
+          <button id="add-you-msg-btn" class="add-btn">+ You</button>
+          <button id="add-system-msg-btn" class="add-btn">+ System</button>
+          <button id="add-question-btn" class="add-btn">+ Question</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="export-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-large">
+      <h2>Export HTML</h2>
+      <textarea id="export-text" class="export-textarea" readonly></textarea>
+      <div class="modal-actions">
+        <button id="copy-export-btn" class="action-btn primary">Copy</button>
+        <button id="download-export-btn" class="action-btn primary">Download</button>
+        <button id="close-export-btn" class="action-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
