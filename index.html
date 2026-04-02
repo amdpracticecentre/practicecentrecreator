@@ -997,6 +997,7 @@ class LiveScenarioBuilder {
   showExportModal() {
     document.getElementById("export-modal").classList.remove("hidden");
     this.updateExportPreview();
+    this.updateExportActionLabel();
   }
 
   closeExportModal() {
@@ -1036,6 +1037,16 @@ class LiveScenarioBuilder {
     const scenarioName = document.getElementById("scenario-name").value.trim() || "Scenario";
     const content = this.generateHTML(scenarioName);
     document.getElementById("export-text").value = content;
+  }
+
+  updateExportActionLabel() {
+    const copyBtn = document.getElementById("copy-export-btn");
+    if (!copyBtn) return;
+    copyBtn.textContent = this.isMobileDevice() && navigator.share ? "Share" : "Copy";
+  }
+
+  isMobileDevice() {
+    return window.matchMedia("(pointer: coarse)").matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   }
 
   generateHTML(scenarioName) {
@@ -1328,33 +1339,74 @@ class LiveScenarioBuilder {
 </html>`;
   }
 
-  copyExport() {
-    const text = document.getElementById("export-text").value;
-    const copyBtn = document.getElementById("copy-export-btn");
+  async copyExport() {
+    if (this.isMobileDevice() && navigator.share) {
+      const shared = await this.shareExport();
+      if (shared) return;
+    }
 
-    const showCopiedState = () => {
-      const oldText = copyBtn.textContent;
-      copyBtn.textContent = "Copied!";
-      window.setTimeout(() => {
-        copyBtn.textContent = oldText;
-      }, 1200);
-    };
+    const text = document.getElementById("export-text").value;
 
     if (navigator.clipboard && window.ClipboardItem) {
       const blob = new Blob([text], { type: "text/plain" });
-      navigator.clipboard.write([
-        new ClipboardItem({
-          "text/plain": blob
-        })
-      ]).then(showCopiedState).catch(() => {
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            "text/plain": blob
+          })
+        ]);
+        this.flashExportButton("Copied!");
+        return;
+      } catch (error) {
         this.copyExportFallback(text);
-        showCopiedState();
-      });
-      return;
+        this.flashExportButton("Copied!");
+        return;
+      }
     }
 
     this.copyExportFallback(text);
-    showCopiedState();
+    this.flashExportButton("Copied!");
+  }
+
+  async shareExport() {
+    const text = document.getElementById("export-text").value;
+    const scenarioName = document.getElementById("scenario-name").value.trim() || "scenario";
+    const safeScenarioName = scenarioName.replace(/[^a-z0-9-_ ]/gi, "").trim() || "scenario";
+    const filename = `${safeScenarioName}.txt`;
+    const file = new File([text], filename, { type: "text/plain" });
+
+    try {
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: safeScenarioName,
+          text: `${safeScenarioName} export`,
+          files: [file]
+        });
+      } else {
+        await navigator.share({
+          title: safeScenarioName,
+          text
+        });
+      }
+      this.flashExportButton("Shared!");
+      return true;
+    } catch (error) {
+      if (error && error.name === "AbortError") {
+        return true;
+      }
+      return false;
+    }
+  }
+
+  flashExportButton(label) {
+    const copyBtn = document.getElementById("copy-export-btn");
+    if (!copyBtn) return;
+
+    const defaultLabel = this.isMobileDevice() && navigator.share ? "Share" : "Copy";
+    copyBtn.textContent = label;
+    window.setTimeout(() => {
+      copyBtn.textContent = defaultLabel;
+    }, 1200);
   }
 
   copyExportFallback(text) {
