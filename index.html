@@ -52,19 +52,14 @@ input,
 textarea {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.94);
-  color: var(--text);
+  color: #fff;
   border-radius: 15px;
   padding: 0.6rem 0.8rem;
   font-family: inherit;
   font-size: 0.95rem;
 }
 
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  background: #fff;
-}
+
 
 .builder-shell {
   display: grid;
@@ -73,8 +68,8 @@ textarea:focus {
 }
 
 .builder-header {
-  background: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid var(--line);
+  background: #121214;
+  border-bottom: 1px solid rgb(65 65 65 / 33%);
   padding: 1rem 1.2rem;
   display: flex;
   justify-content: center;
@@ -99,20 +94,26 @@ textarea:focus {
 .scenario-name-input {
   min-width: 220px;
   text-align: center;
-}
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1.5px solid #8080804d !important;
+  color: white;
+  border-radius: 0px !important;
+  }
 
 .action-btn {
   border-radius: 8px;
   padding: 0.6rem 1rem;
-  border: 1px solid var(--line);
-  background: rgba(180, 0, 71, 0.12);
+  border: none;
+  background: #fff;
+  color: black !important;
+  font-weight: 500;
 }
 
 .action-btn.primary {
-  border: 1px solid rgba(180, 0, 71, 0.35);
-  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+  background: #5765f2;
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .builder-main {
@@ -150,7 +151,84 @@ textarea:focus {
   padding: 1rem 1rem 7rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0;
+  background: #1a1a1e;
+}
+
+.block-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.25rem 0;
+  border-radius: 8px;
+}
+
+.block-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.block-tools {
+  display: flex;
+  flex: 0 0 32px;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding-top: 0.2rem;
+}
+
+.drag-handle,
+.delete-btn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 7px;
+  background: #1a1a1e;
+  color: #fff;
+}
+
+.drag-handle {
+  cursor: grab;
+  touch-action: none;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-handle span {
+  font-size: 1.2rem;
+  line-height: 0.7;
+}
+
+.delete-btn {
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: rgb(190 55 65 / 30%);
+  border-color: rgb(225 90 100 / 55%);
+}
+
+.drag-handle:focus-visible,
+.delete-btn:focus-visible,
+.plus-toggle:focus-visible,
+.insert-btn:focus-visible {
+  outline: 2px solid #8791ff;
+  outline-offset: 2px;
+}
+
+.block-row.dragging {
+  opacity: 0.45;
+}
+
+.block-drop-preview {
+  display: none;
+  pointer-events: none;
 }
 
 .message-block {
@@ -163,16 +241,24 @@ textarea:focus {
   flex-direction: row-reverse;
 }
 
+.message-block.you .meta {
+  justify-content: flex-end;
+}
+
+.message-block.you .msg-textarea {
+  text-align: right;
+}
+
 .avatar {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: linear-gradient(140deg, #32d2ff, #1a7cf2);
+  background: linear-gradient(140deg, #ffc14d, #ff7b4f);
   flex-shrink: 0;
 }
 
 .message-block.you .avatar {
-  background: linear-gradient(140deg, #ffc14d, #ff7b4f);
+  background: linear-gradient(140deg, #32d2ff, #1a7cf2);
 }
 
 .bubble-wrap {
@@ -189,16 +275,17 @@ textarea:focus {
 
 .author {
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 500;
+  color: white;
 }
 
 .msg-textarea {
   width: 100%;
   min-height: 66px;
   resize: vertical;
-  border-radius: 14px;
-  border: 1px solid rgba(180, 0, 71, 0.3);
-  background: #ffffff;
+  border-radius: 6px;
+  border: none;
+  background: #3839432e !important;
   line-height: 1.45;
 }
 
@@ -236,31 +323,28 @@ textarea:focus {
   border-color: rgba(180, 0, 71, 0.24);
 }
 
-.block-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0.35rem;
-}
-
-.delete-btn {
-  border-radius: 8px;
-  border: 1px solid rgba(180, 0, 71, 0.4);
-  color: var(--danger);
-  background: rgba(180, 0, 71, 0.08);
-  padding: 0.25rem 0.6rem;
-  font-size: 0.78rem;
-}
-
 .question-block {
-  border: 1px solid rgba(180, 0, 71, 0.24);
-  background: rgba(255, 255, 255, 0.97);
+  border: none;
+  background: transparent;
   border-radius: 14px;
   padding: 0.8rem;
+  color: #fff;
+}
+
+.question-block input {
+  background: #3839432e !important;
+  color: #fff;
+  border-color: transparent;
+  outline: none !important;
+}
+
+.question-block input::placeholder {
+  color: #a7a8b2;
 }
 
 .question-title {
   margin: 0 0 0.6rem;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .option-row {
@@ -280,28 +364,62 @@ textarea:focus {
   cursor: not-allowed;
 }
 
-.correct-pill {
-  border-radius: 999px;
-  border: 1px solid rgba(26, 192, 130, 0.6);
-  color: #7ee8bc;
-  background: rgba(26, 192, 130, 0.2);
-  padding: 0.38rem 0.6rem;
-  font-size: 0.78rem;
-  white-space: nowrap;
-}
-
-.correct-pill.inactive {
-  border-color: rgba(180, 0, 71, 0.2);
-  color: var(--muted);
-  background: rgba(180, 0, 71, 0.04);
+.correct-toggle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: #3839432e;
+  color: #bfc0c9;
 }
 
 .option-delete {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
   border-radius: 8px;
-  border: 1px solid rgba(180, 0, 71, 0.4);
-  color: var(--danger);
-  background: rgba(180, 0, 71, 0.08);
-  padding: 0.38rem 0.6rem;
+  background: transparent;
+  color: #bfc0c9;
+
+}
+
+.correct-toggle {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.correct-toggle.unset {
+  opacity: 0.38;
+}
+
+.correct-toggle.correct {
+  opacity: 1;
+  color: #7ee8bc;
+  border-color: transparent;
+  background: rgb(46 219 166 / 30%);
+}
+
+.correct-toggle.incorrect {
+  opacity: 0.8;
+  color: #d77980;
+  border-color: transparent;
+  background: rgb(255 106 117 / 49%);
+}
+
+.correct-toggle:focus-visible,
+.option-delete:focus-visible {
+  outline: transparent;
+  outline-offset: 2px;
+}
+
+.option-delete:hover {
+  background: rgb(190 55 65 / 20%);
 }
 
 .question-footer {
@@ -317,42 +435,101 @@ textarea:focus {
   background: transparent;
   padding: 0;
   font-size: 0.86rem;
-  color: var(--muted);
+  color: #fff;
+}
+
+.inline-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 .inline-hint {
   cursor: default;
-  color: var(--muted);
+  color: #fff;
+  margin-top: 100px;
+  text-align: center;
 }
 
 .insert-controls {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
   width: 100%;
-  margin: 0.15rem 0;
+  height: 42px;
+  position: relative;
+  flex: 0 0 42px;
+}
+
+.insert-controls::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2.5px;
+  border-radius: 999px;
+  background: #28292d8c;
+  transform: translateY(-50%);
+}
+
+.blocks-container.is-rearranging .insert-controls::before,
+.blocks-container.is-rearranging .insert-controls > .plus-toggle,
+.blocks-container.is-rearranging .insert-controls > .insert-menu {
+  visibility: hidden;
+}
+
+.insert-controls.is-drop-target .block-drop-preview {
+  position: absolute;
+  z-index: 3;
+  inset: 2px 0;
+  min-height: 0;
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+  background: rgba(72, 72, 80, 0.294);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  pointer-events: none;
 }
 
 .plus-toggle {
-  border: none;
-  background: transparent;
-  color: var(--accent);
-  width: auto;
-  height: auto;
-  padding: 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0px;
+  border: transparent;
+  border-radius: 0px;
+  background: #1a1a1e;
+  color: white;
+}
+
+.plus-icon {
+  display: block;
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+}
+
+.trash-icon {
+  filter: brightness(0) saturate(100%) invert(22%) sepia(65%) saturate(2200%) hue-rotate(341deg) brightness(78%) contrast(90%);
 }
 
 .insert-menu {
   display: none;
-  margin-top: 0.15rem;
-  width: min(700px, 92vw);
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: max-content;
+  max-width: 100%;
   justify-content: center;
   align-items: center;
+  transform: translate(-50%, -50%);
 }
 
 .insert-menu-inner {
@@ -368,69 +545,71 @@ textarea:focus {
   display: flex;
 }
 
-.insert-controls.open .plus-toggle {
-  display: none;
-}
-
 .insert-btn {
-  border: 1px solid rgba(180, 0, 71, 0.25);
-  border-radius: 999px;
-  background: rgba(180, 0, 71, 0.1);
-  color: var(--accent);
-  padding: 0.4rem 0.8rem;
-  font-size: 0.92rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: none;
+  box-shadow: none;
+  border-radius: 9px;
+  background: #1a1a1e;
+  color: white;
+  font-weight: 500;
+  padding: 0.45rem 0.7rem;
+  white-space: nowrap;
 }
 
 .insert-dismiss {
-  border: 1px solid rgba(180, 0, 71, 0.25);
-  border-radius: 999px;
-  background: rgba(180, 0, 71, 0.1);
-  color: var(--accent);
-  padding: 0.4rem 0.8rem;
-  font-size: 0.92rem;
-  font-weight: 600;
-  line-height: 1;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 0px;
+  background: #1a1a1e;
+  padding: 0.4rem;
 }
 
-.insert-dismiss:hover {
-  color: #7f0032;
+.dismiss-icon {
+  display: block;
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
 }
 
-.insert-btn:hover,
-.insert-dismiss:hover,
-.plus-toggle:hover,
-.inline-add:hover,
-.add-btn:hover {
-  color: var(--accent);
-  background: rgba(180, 0, 71, 0.14);
-}
+
 
 .composer-controls {
   position: absolute;
   left: 50%;
   bottom: 1rem;
   transform: translateX(-50%);
-  border: 1px solid rgba(180, 0, 71, 0.2);
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 10px 26px rgba(121, 0, 48, 0.18);
-  border-radius: 999px;
-  padding: 0.55rem 0.85rem;
+  border: 1px solid rgb(42 42 42);
+  background: rgb(36 36 41);
+  box-shadow: 0 10px 26px rgb(0 0 0 / 18%);
+  border-radius: 14px;
+  padding: 6px;
   display: flex;
   gap: 0.7rem;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: calc(100vw - 1.5rem);
+  width: calc(100vw - 1rem);
   z-index: 2;
 }
 
 .add-btn {
-  border: 1px solid rgba(180, 0, 71, 0.18);
-  border-radius: 999px;
-  background: rgba(180, 0, 71, 0.12);
-  color: var(--accent);
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid rgb(114 114 114 / 10%);
+  box-shadow: 0 10px 26px rgb(0 0 0 / 18%);
+  border-radius: 9px;
+  background: rgb(63 64 82 / 21%);
+  color: white;
+  font-weight: 500;
   padding: 0.45rem 0.9rem;
+  flex: 1;
 }
 
 .modal {
@@ -455,11 +634,40 @@ textarea:focus {
 .modal-content {
   position: relative;
   width: min(760px, 95vw);
-  background: rgba(255, 255, 255, 0.98);
-  border: 1px solid rgba(180, 0, 71, 0.18);
-  border-radius: 12px;
+  background: #1a1a1e;
+  border: none;
+  border-radius: 20px;
   padding: 1.2rem;
   box-shadow: var(--shadow);
+  color: white;
+}
+
+.confirm-modal-content {
+  width: min(420px, 95vw);
+  background: #202126;
+  border-color: #42434c;
+  color: #fff;
+}
+
+.confirm-modal-content p {
+  color: #c5c6ce;
+  line-height: 1.5;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.confirm-actions .action-btn {
+  background: #363740;
+  color: #fff;
+}
+
+.confirm-actions .action-btn.danger {
+  background: #a8323d;
+  color: #fff;
 }
 
 .modal-large {
@@ -481,6 +689,8 @@ textarea:focus {
   font-family: "Courier New", monospace;
   font-size: 0.84rem;
   flex: 1;
+  background: black !important;
+  border: none !important;
 }
 
 .modal-actions {
@@ -533,6 +743,15 @@ textarea:focus {
   .bubble-wrap {
     max-width: 88%;
   }
+
+  .insert-menu-inner {
+    gap: 0.35rem;
+  }
+
+  .insert-btn {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.85rem;
+  }
 }
   </style>
 </head>
@@ -551,10 +770,10 @@ textarea:focus {
         <div id="blocks-container" class="blocks-container"></div>
 
         <div class="composer-controls">
-          <button id="add-user-msg-btn" class="add-btn">+ User</button>
-          <button id="add-you-msg-btn" class="add-btn">+ You</button>
-          <button id="add-system-msg-btn" class="add-btn">+ System</button>
-          <button id="add-question-btn" class="add-btn">+ Question</button>
+          <button id="add-user-msg-btn" class="add-btn">User</button>
+          <button id="add-you-msg-btn" class="add-btn">You</button>
+          <button id="add-system-msg-btn" class="add-btn">System</button>
+          <button id="add-question-btn" class="add-btn">Question</button>
         </div>
       </section>
       <section id="preview-view" class="chat-canvas hidden" aria-label="Scenario preview">
@@ -567,11 +786,23 @@ textarea:focus {
     <div class="modal-backdrop"></div>
     <div class="modal-content modal-large">
       <h2>Export</h2>
-      <p>Copy this code and paste it into the #___ discord channel within the training server, along with the title of your scenario. It will then be added to the practice centre after being reviewed.</p>
+      <p>Copy this code and share it within the mentor channels inside of the training server where it can be accessed. Then ping @_mr_moo to have it be converted into a functional scenario for others to use.</p>
       <textarea id="export-text" class="export-textarea" readonly></textarea>
       <div class="modal-actions">
         <button id="copy-export-btn" class="action-btn primary">Copy</button>
         <button id="close-export-btn" class="action-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="confirm-delete-modal" class="modal hidden" role="alertdialog" aria-modal="true" aria-labelledby="confirm-delete-title" aria-describedby="confirm-delete-message">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content confirm-modal-content">
+      <h2 id="confirm-delete-title">Delete this block?</h2>
+      <p id="confirm-delete-message">This block will be permanently removed from the scenario.</p>
+      <div class="confirm-actions">
+        <button id="cancel-delete-btn" class="action-btn" type="button">Cancel</button>
+        <button id="confirm-delete-btn" class="action-btn danger" type="button">Delete</button>
       </div>
     </div>
   </div>
@@ -582,6 +813,8 @@ class LiveScenarioBuilder {
     this.blocks = [];
     this.uid = 0;
     this.isPreviewMode = false;
+    this.pendingDeleteId = null;
+    this.draggedBlockId = null;
     this.init();
   }
 
@@ -600,6 +833,15 @@ class LiveScenarioBuilder {
     const copyBtn = document.getElementById("copy-export-btn");
     const closeExportBtn = document.getElementById("close-export-btn");
     const exportBackdrop = document.querySelector("#export-modal .modal-backdrop");
+    const confirmDeleteBtn = document.getElementById("confirm-delete-btn");
+    const cancelDeleteBtn = document.getElementById("cancel-delete-btn");
+    const confirmDeleteBackdrop = document.querySelector("#confirm-delete-modal .modal-backdrop");
+
+    ["add-user-msg-btn", "add-you-msg-btn", "add-system-msg-btn", "add-question-btn"].forEach((id) => {
+      const button = document.getElementById(id);
+      const label = button.textContent.replace(/^\+\s*/, "").trim();
+      button.replaceChildren(this.createPlusIcon(), document.createTextNode(label));
+    });
 
     if (previewBtn) {
       previewBtn.addEventListener("click", () => {
@@ -654,6 +896,41 @@ class LiveScenarioBuilder {
         this.closeExportModal();
       });
     }
+
+    confirmDeleteBtn.addEventListener("click", () => {
+      if (this.pendingDeleteId) {
+        const index = this.blocks.findIndex((block) => block.id === this.pendingDeleteId);
+        if (index !== -1) this.deleteBlock(index);
+      }
+      this.closeDeleteModal();
+    });
+
+    cancelDeleteBtn.addEventListener("click", () => this.closeDeleteModal());
+    confirmDeleteBackdrop.addEventListener("click", () => this.closeDeleteModal());
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") this.closeDeleteModal();
+    });
+
+    const blocksContainer = document.getElementById("blocks-container");
+    blocksContainer.addEventListener("dragover", (event) => {
+      if (!this.draggedBlockId) return;
+      event.preventDefault();
+      const anchor = this.closestInsertAnchor(event.clientY);
+      if (!anchor) {
+        this.removeDropPreview();
+        return;
+      }
+      this.showDropPreview(anchor);
+      event.dataTransfer.dropEffect = "move";
+    });
+
+    blocksContainer.addEventListener("drop", (event) => {
+      if (!this.draggedBlockId) return;
+      event.preventDefault();
+      const anchor = this.closestInsertAnchor(event.clientY);
+      if (anchor) this.moveBlockToIndex(this.draggedBlockId, Number(anchor.dataset.insertIndex));
+      this.finishRearranging();
+    });
   }
 
   nextId(prefix) {
@@ -681,6 +958,17 @@ class LiveScenarioBuilder {
   deleteBlock(index) {
     this.blocks.splice(index, 1);
     this.render();
+  }
+
+  showDeleteModal(blockId) {
+    this.pendingDeleteId = blockId;
+    document.getElementById("confirm-delete-modal").classList.remove("hidden");
+    document.getElementById("cancel-delete-btn").focus();
+  }
+
+  closeDeleteModal() {
+    this.pendingDeleteId = null;
+    document.getElementById("confirm-delete-modal").classList.add("hidden");
   }
 
   createOption() {
@@ -724,11 +1012,7 @@ class LiveScenarioBuilder {
     }
 
     this.blocks.forEach((block, index) => {
-      if (block.type === "question") {
-        container.appendChild(this.renderQuestionBlock(block, index));
-      } else {
-        container.appendChild(this.renderMessageBlock(block, index));
-      }
+      container.appendChild(this.renderBlockRow(block, index));
 
       if (index < this.blocks.length - 1) {
         container.appendChild(this.createInsertControls(index + 1));
@@ -745,11 +1029,12 @@ class LiveScenarioBuilder {
   createInsertControls(index) {
     const controls = document.createElement("div");
     controls.className = "insert-controls";
+    controls.dataset.insertIndex = String(index);
 
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "plus-toggle";
-    toggle.textContent = "+ Insert";
+    toggle.appendChild(this.createPlusIcon());
     toggle.setAttribute("aria-label", "Add block");
     toggle.addEventListener("click", () => {
       controls.classList.toggle("open");
@@ -760,27 +1045,32 @@ class LiveScenarioBuilder {
     const menuInner = document.createElement("div");
     menuInner.className = "insert-menu-inner";
 
-    menuInner.appendChild(this.makeInsertBtn("+ user", () => {
+    menuInner.appendChild(this.makeInsertBtn("User", () => {
       this.addBlock("user", index);
     }));
 
-    menuInner.appendChild(this.makeInsertBtn("+ you", () => {
+    menuInner.appendChild(this.makeInsertBtn("You", () => {
       this.addBlock("you", index);
     }));
 
-    menuInner.appendChild(this.makeInsertBtn("+ system", () => {
+    menuInner.appendChild(this.makeInsertBtn("System", () => {
       this.addBlock("system", index);
     }));
 
-    menuInner.appendChild(this.makeInsertBtn("+ question", () => {
+    menuInner.appendChild(this.makeInsertBtn("Question", () => {
       this.addBlock("question", index);
     }));
 
     const dismiss = document.createElement("button");
     dismiss.type = "button";
     dismiss.className = "insert-dismiss";
-    dismiss.textContent = "x";
     dismiss.setAttribute("aria-label", "Dismiss insert options");
+    const dismissIcon = document.createElement("img");
+    dismissIcon.className = "dismiss-icon";
+    dismissIcon.src = "icons/bannerclose.svg";
+    dismissIcon.alt = "";
+    dismissIcon.setAttribute("aria-hidden", "true");
+    dismiss.appendChild(dismissIcon);
     dismiss.addEventListener("click", () => {
       controls.classList.remove("open");
     });
@@ -796,9 +1086,142 @@ class LiveScenarioBuilder {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "insert-btn";
-    btn.textContent = label;
+    btn.appendChild(this.createPlusIcon());
+    btn.appendChild(document.createTextNode(label));
     btn.addEventListener("click", onClick);
     return btn;
+  }
+
+  createPlusIcon() {
+    const icon = document.createElement("img");
+    icon.className = "plus-icon";
+    icon.src = "icons/Plus.svg";
+    icon.alt = "";
+    icon.setAttribute("aria-hidden", "true");
+    return icon;
+  }
+
+  createTrashIcon() {
+    const icon = document.createElement("img");
+    icon.className = "plus-icon trash-icon";
+    icon.src = "icons/Trash%20Icon.svg";
+    icon.alt = "";
+    icon.setAttribute("aria-hidden", "true");
+    return icon;
+  }
+
+  renderBlockRow(block, index) {
+    const container = document.getElementById("blocks-container");
+    const row = document.createElement("div");
+    row.className = "block-row";
+    row.draggable = true;
+    row.dataset.blockId = block.id;
+
+    const tools = document.createElement("div");
+    tools.className = "block-tools";
+
+    const handle = document.createElement("button");
+    handle.type = "button";
+    handle.className = "drag-handle";
+    handle.setAttribute("aria-label", `Drag to move ${block.type} block`);
+    handle.title = "Drag to rearrange";
+    handle.draggable = true;
+    const grip = document.createElement("span");
+    grip.textContent = "⠿";
+    grip.setAttribute("aria-hidden", "true");
+    handle.appendChild(grip);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "delete-btn";
+    deleteButton.setAttribute("aria-label", "Delete block");
+    deleteButton.title = "Delete block";
+    deleteButton.appendChild(this.createTrashIcon());
+    deleteButton.addEventListener("click", () => this.showDeleteModal(block.id));
+
+    tools.appendChild(handle);
+    tools.appendChild(deleteButton);
+
+    const content = document.createElement("div");
+    content.className = "block-content";
+    content.appendChild(block.type === "question"
+      ? this.renderQuestionBlock(block, index)
+      : this.renderMessageBlock(block, index));
+
+    row.appendChild(tools);
+    row.appendChild(content);
+
+    row.addEventListener("dragstart", (event) => {
+      if (!event.target.closest(".drag-handle")) {
+        event.preventDefault();
+        return;
+      }
+      this.draggedBlockId = block.id;
+      row.classList.add("dragging");
+      container.classList.add("is-rearranging");
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", block.id);
+    });
+
+    row.addEventListener("dragend", () => {
+      row.classList.remove("dragging");
+      this.finishRearranging();
+    });
+
+    return row;
+  }
+
+  closestInsertAnchor(clientY) {
+    const anchors = [...document.querySelectorAll("#blocks-container .insert-controls")];
+    if (anchors.length === 0) return null;
+    return anchors.reduce((closest, anchor) => {
+      const bounds = anchor.getBoundingClientRect();
+      const distance = Math.abs(clientY - (bounds.top + bounds.height / 2));
+      return !closest || distance < closest.distance
+        ? { anchor, distance }
+        : closest;
+    }, null).anchor;
+  }
+
+  showDropPreview(anchor) {
+    this.removeDropPreview();
+    const sourceBlock = this.blocks.find((block) => block.id === this.draggedBlockId);
+    if (!sourceBlock) return;
+
+    const sourceIndex = this.blocks.indexOf(sourceBlock);
+    const insertIndex = Number(anchor.dataset.insertIndex);
+    if (insertIndex === sourceIndex || insertIndex === sourceIndex + 1) return;
+
+    const preview = document.createElement("div");
+    preview.className = "block-drop-preview";
+    preview.textContent = `Move Section here`;
+    preview.setAttribute("aria-hidden", "true");
+    anchor.classList.add("is-drop-target");
+    anchor.appendChild(preview);
+  }
+
+  removeDropPreview() {
+    document.querySelectorAll(".block-drop-preview").forEach((preview) => preview.remove());
+    document.querySelectorAll(".insert-controls.is-drop-target").forEach((anchor) => {
+      anchor.classList.remove("is-drop-target");
+    });
+  }
+
+  finishRearranging() {
+    this.draggedBlockId = null;
+    document.getElementById("blocks-container").classList.remove("is-rearranging");
+    this.removeDropPreview();
+  }
+
+  moveBlockToIndex(sourceId, insertIndex) {
+    const sourceIndex = this.blocks.findIndex((block) => block.id === sourceId);
+    if (sourceIndex === -1) return;
+
+    const [block] = this.blocks.splice(sourceIndex, 1);
+    const adjustedInsertIndex = insertIndex > sourceIndex ? insertIndex - 1 : insertIndex;
+    this.blocks.splice(adjustedInsertIndex, 0, block);
+    this.finishRearranging();
+    this.render();
   }
 
   renderMessageBlock(block, index) {
@@ -830,22 +1253,9 @@ class LiveScenarioBuilder {
       this.blocks[index].text = e.target.value;
     });
 
-    const actions = document.createElement("div");
-    actions.className = "block-actions";
-
-    const del = document.createElement("button");
-    del.type = "button";
-    del.className = "delete-btn";
-    del.textContent = "Delete";
-    del.addEventListener("click", () => {
-      this.deleteBlock(index);
-    });
-
     meta.appendChild(author);
-    actions.appendChild(del);
     wrap.appendChild(meta);
     wrap.appendChild(text);
-    wrap.appendChild(actions);
 
     element.appendChild(avatar);
     element.appendChild(wrap);
@@ -858,7 +1268,7 @@ class LiveScenarioBuilder {
 
     const title = document.createElement("p");
     title.className = "question-title";
-    title.textContent = "Question";
+    title.textContent = "Hurdle Question";
     wrapper.appendChild(title);
 
     block.options.forEach((option, optionIndex) => {
@@ -867,7 +1277,7 @@ class LiveScenarioBuilder {
 
       const labelInput = document.createElement("input");
       labelInput.type = "text";
-      labelInput.placeholder = "Option";
+      labelInput.placeholder = "Potential Answer";
       labelInput.value = option.label;
       labelInput.addEventListener("input", (e) => {
         this.blocks[blockIndex].options[optionIndex].label = e.target.value;
@@ -875,32 +1285,55 @@ class LiveScenarioBuilder {
 
       const feedbackInput = document.createElement("input");
       feedbackInput.type = "text";
-      feedbackInput.placeholder = option.correct ? "Correct Answer" : "Feedback";
+      feedbackInput.placeholder = option.correct ? "Correct Answer" : "Feedback for wrong answer";
       feedbackInput.value = option.feedback;
       feedbackInput.disabled = option.correct;
       feedbackInput.addEventListener("input", (e) => {
         this.blocks[blockIndex].options[optionIndex].feedback = e.target.value;
       });
 
-      const correctBtn = document.createElement("button");
-      correctBtn.type = "button";
-      correctBtn.className = `correct-pill ${option.correct ? "" : "inactive"}`;
-      correctBtn.textContent = option.correct ? "Correct" : "Set Correct";
-      correctBtn.addEventListener("click", () => {
+      const hasCorrectOption = block.options.some((item) => item.correct);
+      const correctToggle = document.createElement("button");
+      correctToggle.type = "button";
+      correctToggle.className = `correct-toggle ${
+        option.correct ? "correct" : hasCorrectOption ? "incorrect" : "unset"
+      }`;
+      correctToggle.setAttribute("role", "checkbox");
+      correctToggle.setAttribute("aria-checked", String(option.correct));
+      correctToggle.setAttribute(
+        "aria-label",
+        option.correct ? "Correct answer" : "Set as correct answer"
+      );
+      correctToggle.title = option.correct
+        ? "Correct answer"
+        : hasCorrectOption
+        ? "Incorrect answer"
+        : "Set as correct answer";
+      const stateIcon = document.createElement("img");
+      stateIcon.src = option.correct || !hasCorrectOption
+        ? "icons/check.svg"
+        : "icons/bannerclose.svg";
+      stateIcon.alt = "";
+      stateIcon.setAttribute("aria-hidden", "true");
+      stateIcon.className = "plus-icon";
+      correctToggle.appendChild(stateIcon);
+      correctToggle.addEventListener("click", () => {
         this.setCorrectOption(blockIndex, optionIndex);
       });
 
       const optionDelete = document.createElement("button");
       optionDelete.type = "button";
       optionDelete.className = "option-delete";
-      optionDelete.textContent = "Delete";
+      optionDelete.setAttribute("aria-label", "Delete option");
+      optionDelete.title = "Delete option";
+      optionDelete.appendChild(this.createTrashIcon());
       optionDelete.addEventListener("click", () => {
         this.deleteOption(blockIndex, optionIndex);
       });
 
       row.appendChild(labelInput);
       row.appendChild(feedbackInput);
-      row.appendChild(correctBtn);
+      row.appendChild(correctToggle);
       row.appendChild(optionDelete);
       wrapper.appendChild(row);
     });
@@ -911,21 +1344,13 @@ class LiveScenarioBuilder {
     const addOptionBtn = document.createElement("button");
     addOptionBtn.type = "button";
     addOptionBtn.className = "inline-add";
-    addOptionBtn.textContent = "+ Add Option";
+    addOptionBtn.appendChild(this.createPlusIcon());
+    addOptionBtn.appendChild(document.createTextNode("Add Option"));
     addOptionBtn.addEventListener("click", () => {
       this.addOption(blockIndex);
     });
 
-    const deleteQuestionBtn = document.createElement("button");
-    deleteQuestionBtn.type = "button";
-    deleteQuestionBtn.className = "delete-btn";
-    deleteQuestionBtn.textContent = "Delete Question";
-    deleteQuestionBtn.addEventListener("click", () => {
-      this.deleteBlock(blockIndex);
-    });
-
     footer.appendChild(addOptionBtn);
-    footer.appendChild(deleteQuestionBtn);
     wrapper.appendChild(footer);
 
     return wrapper;
@@ -1063,16 +1488,16 @@ class LiveScenarioBuilder {
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --bg-top: #ffffff;
-        --bg-mid: #fff2f8;
-        --bg-bottom: #ffdce9;
-        --line: rgba(180, 0, 71, 0.32);
-        --text: #1f0a15;
-        --muted: #603145;
-        --accent: #b40047;
-        --danger: #b40047;
+        --bg-top: #1a1a1e;
+        --bg-mid: #1a1a1e;
+        --bg-bottom: #1a1a1e;
+        --line: rgb(65 65 65 / 45%);
+        --text: #f4f4f5;
+        --muted: #a7a8b2;
+        --accent: #626ff4;
+        --danger: #a94b54;
         --positive: #1ac082;
-        --shadow: 0 16px 34px rgba(121, 0, 48, 0.2);
+        --shadow: 0 16px 34px rgba(0, 0, 0, 0.35);
       }
       * { box-sizing: border-box; }
       body {
@@ -1082,18 +1507,20 @@ class LiveScenarioBuilder {
         place-items: center;
         font-family: "Barlow", sans-serif;
         color: var(--text);
-        background: radial-gradient(circle at 12% 15%, rgba(180, 0, 71, 0.15), transparent 30%), radial-gradient(circle at 87% 18%, rgba(212, 120, 157, 0.2), transparent 34%), linear-gradient(160deg, var(--bg-top), var(--bg-mid) 45%, var(--bg-bottom));
+        background: #121214;
       }
       .app-shell {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr);
         width: min(920px, calc(100vw - 2rem));
         height: min(92vh, 860px);
-        border: 1px solid var(--line);
-        border-radius: 22px;
+        border: none;
+        border-radius: 14px;
         box-shadow: var(--shadow);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(255, 239, 247, 0.97));
+        background: #1a1a1e;
         overflow: hidden;
       }
-      .panel { width: 100%; height: 100%; }
+      .panel { width: 100%; height: 100%; min-height: 0; }
       .hidden { display: none !important; }
       .splash-screen { display: grid; place-items: center; padding: clamp(1.5rem, 2vw, 2.5rem); }
       .splash-card {
@@ -1101,57 +1528,62 @@ class LiveScenarioBuilder {
         text-align: center;
         padding: clamp(1.6rem, 3vw, 2.8rem);
         border-radius: 24px;
-        border: 1px solid var(--line);
-        background: linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(255, 241, 248, 0.95));
+        border: 1px solid #383943;
+        background: #242429;
       }
-      .kicker { margin: 0; text-transform: uppercase; letter-spacing: 0.14em; color: #b40047; font-size: 0.75rem; }
+      .kicker { margin: 0; text-transform: uppercase; letter-spacing: 0.14em; color: #a7a8b2; font-size: 0.75rem; }
       h1 { font-family: "Space Grotesk", sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; margin: 0.65rem 0; }
       .lead { margin: 0 auto 1.8rem; max-width: 45ch; color: var(--muted); font-size: clamp(1rem, 2vw, 1.2rem); }
       button { border: none; color: inherit; font: inherit; cursor: pointer; }
       .primary-btn {
-        background: linear-gradient(90deg, var(--accent), #c7457b);
+        background: #5765f2;
         color: #fff;
         font-weight: 700;
         border-radius: 999px;
         padding: 0.75rem 1.6rem;
       }
-      .chat-screen { display: grid; grid-template-rows: auto 1fr auto; background: linear-gradient(180deg, rgba(255, 252, 254, 0.98), rgba(255, 243, 249, 0.96)); }
-      .chat-header { display: flex; justify-content: space-between; align-items: center; padding: 0.95rem 1.1rem; border-bottom: 1px solid var(--line); background: rgba(255, 248, 252, 0.95); }
+      .chat-screen { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; min-height: 0; overflow: hidden; background: #1a1a1e; }
+      .chat-header { display: flex; justify-content: space-between; align-items: center; padding: 0.95rem 1.1rem; border: none; background: #121214; margin: 5px; border-radius: 9px; }
       .channel-name { margin: 0; font-weight: 700; }
       .channel-subtitle { margin: 0.15rem 0 0; color: var(--muted); font-size: 0.9rem; }
-      .ghost-btn { border-radius: 999px; background: rgba(180, 0, 71, 0.1); color: var(--accent); padding: 0.4rem 0.95rem; }
-      .chat-log { overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+      .ghost-btn { border-radius: 8px; background: #292a31; color: #f4f4f5; padding: 0.4rem 0.95rem; }
+      .chat-log { min-height: 0; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
       .message { display: flex; gap: 0.68rem; align-items: flex-start; }
-      .message.you { flex-direction: row-reverse; }
-      .avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(140deg, #c7457b, #b40047); flex-shrink: 0; }
-      .message.you .avatar { background: linear-gradient(140deg, #d7709a, #b40047); }
-      .bubble-wrap { max-width: min(78%, 660px); }
+      .message.you { flex-direction: row; }
+      .avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(140deg, #ffc14d, #ff7b4f); flex-shrink: 0; }
+      .message.you .avatar { background: linear-gradient(140deg, #32d2ff, #1a7cf2); }
+      .bubble-wrap { width: 100%; min-width: 0; max-width: min(78%, 660px); }
+      .message.continuation .avatar,
+      .message.continuation .meta { display: none; }
+      .message.continuation .bubble-wrap { margin-left: calc(34px + 0.68rem); }
+      .message.sender-change { margin-top: 1rem; }
       .meta { display: flex; gap: 0.55rem; align-items: center; margin-bottom: 0.2rem; }
       .author { font-weight: 700; font-size: 0.95rem; }
+      .message.you .author { color: #7da2ff; }
       .time { color: var(--muted); font-size: 0.8rem; }
-      .bubble { border-radius: 16px; border: 1px solid rgba(180, 0, 71, 0.26); background: rgba(255, 255, 255, 0.95); padding: 0.7rem 0.8rem; line-height: 1.4; white-space: pre-wrap; }
-      .message.you .bubble { background: rgba(180, 0, 71, 0.13); }
+      .bubble { border-radius: 8px; border: none; background: transparent; color: var(--text); padding: 0px; line-height: 1.4; white-space: pre-wrap; overflow-wrap: anywhere; }
+      .bubble.continuation { margin-top: 0.35rem; }
       .message.typing .bubble { display: flex; gap: 0.35rem; align-items: center; min-height: 34px; min-width: 58px; }
-      .typing-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(180, 0, 71, 0.86); animation: typing-pulse 900ms ease-in-out infinite; }
+      .typing-dot { width: 7px; height: 7px; border-radius: 50%; background: #a7a8b2; animation: typing-pulse 900ms ease-in-out infinite; }
       .typing-dot:nth-child(2) { animation-delay: 140ms; }
       .typing-dot:nth-child(3) { animation-delay: 280ms; }
-      .choices { border-top: 1px solid var(--line); padding: 0.8rem; display: grid; gap: 0.6rem; background: rgba(255, 246, 251, 0.98); }
-      .choice-btn { width: 100%; text-align: left; border-radius: 12px; border: 1px solid rgba(180, 0, 71, 0.24); background: rgba(255, 255, 255, 0.98); padding: 0.72rem 0.82rem; color: var(--text); }
+      .choices { max-height: 35vh; overflow-y: auto; border: none; padding: 7px; display: grid; align-content: start; gap: 0.6rem; background: #121214; border-radius: 9px; margin: 5px; }
+      .choice-btn { width: 100%; text-align: left; border-radius: 4px; border: 1px solid #383943; background: #242429; padding: 0.72rem 0.82rem; color: var(--text); }
       .choice-btn.correct { border-color: rgba(26, 192, 130, 0.5); background: rgba(26, 192, 130, 0.18); }
-      .choice-btn.wrong { border-color: rgba(255, 117, 79, 0.62); background: rgba(255, 117, 79, 0.17); }
+      .choice-btn.wrong { border-color: rgba(169, 75, 84, 0.55); background: rgba(169, 75, 84, 0.18); }
       .choice-btn:disabled { opacity: 0.72; }
       .modal { position: fixed; inset: 0; display: grid; place-items: center; z-index: 1000; padding: 1rem; }
       .modal.hidden { display: none !important; }
       .modal-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.6); }
-      .modal-content { position: relative; background: rgba(255, 255, 255, 0.99); border: 1px solid rgba(180, 0, 71, 0.22); border-radius: 16px; padding: 2rem; max-width: 420px; text-align: center; box-shadow: var(--shadow); }
-      .feedback-text { margin: 0 0 1.5rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); }
-      .modal-close-btn { background: linear-gradient(90deg, var(--accent), #c7457b); color: #fff; font-weight: 700; border-radius: 8px; padding: 0.8rem 1.8rem; }
+      .modal-content { position: relative; display: flex; flex-direction: column; align-items: center; width: min(720px, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); min-width: 0; background: #242429; border: 1px solid #42434c; border-radius: 12px; padding: clamp(1rem, 4vw, 2rem); text-align: center; box-shadow: var(--shadow); overflow: hidden; }
+      .feedback-text { width: 100%; max-height: min(45vh, 360px); overflow: hidden; margin: 0 0 1.5rem; font-size: 1.05rem; line-height: 1.5; color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; }
+      .modal-close-btn { flex: 0 0 auto; background: #5765f2; color: #fff; font-weight: 600; border-radius: 8px; padding: 0.8rem 1.8rem; }
       .message.system { justify-content: center; }
       .message.system .avatar,
       .message.system .author,
       .message.system .time { display: none; }
-      .message.system .bubble-wrap { max-width: 100%; text-align: center; }
-      .message.system .bubble { opacity: 0.75; background: rgba(180, 0, 71, 0.06); border-color: rgba(180, 0, 71, 0.12); font-size: 0.95rem; color: rgba(64, 24, 42, 0.8); max-width: 600px; }
+      .message.system .bubble-wrap { flex: 1; width: 100%; max-width: none; text-align: center; }
+      .message.system .bubble { display: block; width: min(100%, 600px); margin: 0 auto; opacity: 0.75; background: transparent; border: none; padding: 0; font-size: 0.95rem; color: #d0d1d8; text-align: center; }
       @keyframes typing-pulse {
         0%, 65%, 100% { transform: translateY(0); opacity: 0.4; }
         35% { transform: translateY(-3px); opacity: 1; }
@@ -1230,6 +1662,30 @@ class LiveScenarioBuilder {
         const authorEl = fragment.querySelector(".author");
         const timeEl = fragment.querySelector(".time");
         const bubbleEl = fragment.querySelector(".bubble");
+        const previousMessage = [...chatLog.children].reverse().find((item) =>
+          item.classList.contains("message") && !item.classList.contains("typing")
+        );
+        if (
+          !isSystem &&
+          previousMessage?.classList.contains("message") &&
+          !previousMessage.classList.contains("system") &&
+          previousMessage.dataset.sender === from
+        ) {
+          bubbleEl.classList.add("continuation");
+          bubbleEl.textContent = text;
+          previousMessage.querySelector(".bubble-wrap").appendChild(bubbleEl);
+          chatLog.scrollTop = chatLog.scrollHeight;
+          return;
+        }
+        message.dataset.sender = from;
+        if (
+          !isSystem &&
+          previousMessage &&
+          !previousMessage.classList.contains("system") &&
+          previousMessage.dataset.sender !== from
+        ) {
+          message.classList.add("sender-change");
+        }
         if (from === "you") {
           message.classList.add("you");
         }
@@ -1245,10 +1701,28 @@ class LiveScenarioBuilder {
       function showTypingIndicator({ author, from = "user" }) {
         const wrapper = document.createElement("article");
         wrapper.className = "message typing";
+        wrapper.dataset.sender = from;
+        const previousMessage = [...chatLog.children].reverse().find((item) =>
+          item.classList.contains("message") && !item.classList.contains("typing")
+        );
+        if (
+          previousMessage?.classList.contains("message") &&
+          !previousMessage.classList.contains("system") &&
+          previousMessage.dataset.sender === from
+        ) {
+          wrapper.classList.add("continuation");
+        }
         if (from === "you") {
           wrapper.classList.add("you");
         }
         wrapper.innerHTML = '<div class="avatar"></div><div class="bubble-wrap"><div class="meta"><span class="author"></span><span class="time">typing...</span></div><div class="bubble" aria-label="typing indicator"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div></div>';
+        if (
+          previousMessage &&
+          !previousMessage.classList.contains("system") &&
+          previousMessage.dataset.sender !== from
+        ) {
+          wrapper.classList.add("sender-change");
+        }
         wrapper.querySelector(".author").textContent = author;
         chatLog.appendChild(wrapper);
         chatLog.scrollTop = chatLog.scrollHeight;
@@ -1266,6 +1740,9 @@ class LiveScenarioBuilder {
           done.className = "channel-subtitle";
           done.textContent = "Scenario complete.";
           choicesEl.appendChild(done);
+          requestAnimationFrame(() => {
+            chatLog.scrollTop = chatLog.scrollHeight;
+          });
           return;
         }
         node.options.forEach((option) => {
@@ -1275,6 +1752,9 @@ class LiveScenarioBuilder {
           btn.textContent = option.label;
           btn.addEventListener("click", () => handleChoice(option, btn));
           choicesEl.appendChild(btn);
+        });
+        requestAnimationFrame(() => {
+          chatLog.scrollTop = chatLog.scrollHeight;
         });
       }
       async function goToNode(nodeId) {
